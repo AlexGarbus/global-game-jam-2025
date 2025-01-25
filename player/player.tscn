@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://oe7y6q1dmsbn"]
+[gd_scene load_steps=5 format=3 uid="uid://oe7y6q1dmsbn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_mam4c"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gr76r"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_48d30"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqimg"]
 
@@ -13,6 +15,10 @@ script = ExtResource("1_mam4c")
 
 [node name="Model" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("CapsuleMesh_gr76r")
+
+[node name="Pointer" type="MeshInstance3D" parent="Pivot/Model"]
+transform = Transform3D(-0.5, 4.37114e-08, -1.91069e-15, 0, -2.18557e-08, -0.5, -4.37114e-08, -0.5, 2.18557e-08, 0, 0, -0.592)
+mesh = SubResource("PrismMesh_48d30")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_eqimg")
