@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://q6w8qprc1sco"]
+[gd_scene load_steps=9 format=3 uid="uid://q6w8qprc1sco"]
 
 [ext_resource type="PackedScene" uid="uid://oe7y6q1dmsbn" path="res://player/player.tscn" id="1_aegj2"]
+[ext_resource type="PackedScene" uid="uid://btgrbld0482bj" path="res://goal/goal.tscn" id="1_bliox"]
+[ext_resource type="Script" path="res://main.gd" id="1_xik27"]
 [ext_resource type="PackedScene" uid="uid://bhaotujikxswr" path="res://pickup/pickup.tscn" id="2_eva6p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wlfph"]
@@ -9,7 +11,17 @@ size = Vector3(100, 0, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_eqns3"]
 size = Vector3(100, 1, 100)
 
+[sub_resource type="Curve3D" id="Curve3D_1a5ev"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -45.3399, 0, -45.1559, 0, 0, 0, 0, 0, 0, 45.5133, 0, -45.1559, 0, 0, 0, 0, 0, 0, 48.1911, 0, 47.61, 0, 0, 0, 0, 0, 0, -45.3399, 0, 47.2274, 0, 0, 0, 0, 0, 0, -45.3399, 0, -45.1559),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_yyk7e"]
+
 [node name="Main" type="Node"]
+script = ExtResource("1_xik27")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -20,6 +32,9 @@ shape = SubResource("BoxShape3D_wlfph")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_eqns3")
+
+[node name="Goal" parent="Ground" instance=ExtResource("1_bliox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23754, 1.47241, -8.53279)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.211632, 0.977349, 0, -0.97735, 0.211632, 0, 24.2496, 0)
@@ -32,5 +47,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.23931, 0.429177, 2.39522)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58308, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.960406, 0.278606, 0, -0.278606, 0.960406, 0, 4.26749, 9.00589)
-top_level = true
+transform = Transform3D(1, 0, 0, 0, 0.960406, 0.278606, 0, -0.278606, 0.960406, 0, 2.68441, 9.00589)
+
+[node name="StartPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_1a5ev")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="StartPath"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -45.3399, 0, -45.1559)
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="WorldBoundary" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.0492, 0)
+shape = SubResource("WorldBoundaryShape3D_yyk7e")
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_entered" from="WorldBoundary" to="." method="_on_world_boundary_body_entered"]
