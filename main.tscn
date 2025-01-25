@@ -27,4 +27,5 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58308, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.196374, 0.980529, 0, -0.980529, 0.196374, 0, 8.32661, 1.11832)
+transform = Transform3D(1, 0, 0, 0, 0.196374, 0.980529, 0, -0.980529, 0.196374, 0, 9.90969, 1.11832)
+top_level = true

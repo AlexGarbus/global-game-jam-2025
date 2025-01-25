@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://oe7y6q1dmsbn"]
+[gd_scene load_steps=7 format=3 uid="uid://oe7y6q1dmsbn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_mam4c"]
 
@@ -6,10 +6,21 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_48d30"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_uohq2"]
+radius = 1.0
+height = 2.0
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqimg"]
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xkprb"]
+radius = 1.0
+
+[node name="Player" type="RigidBody3D"]
+collision_layer = 3
+lock_rotation = true
 script = ExtResource("1_mam4c")
+move_force = 25.0
+jump_force = 5.0
 
 [node name="Pivot" type="Node3D" parent="."]
 
@@ -20,5 +31,17 @@ mesh = SubResource("CapsuleMesh_gr76r")
 transform = Transform3D(-0.5, 4.37114e-08, -1.91069e-15, 0, -2.18557e-08, -0.5, -4.37114e-08, -0.5, 2.18557e-08, 0, 0, -0.592)
 mesh = SubResource("PrismMesh_48d30")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Bubble" type="MeshInstance3D" parent="Pivot"]
+visible = false
+mesh = SubResource("SphereMesh_uohq2")
+
+[node name="CapsuleShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_eqimg")
+
+[node name="SphereShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xkprb")
+disabled = true
+
+[node name="FloorDetector" type="RayCast3D" parent="."]
+top_level = true
+target_position = Vector3(0, -1.1, 0)
