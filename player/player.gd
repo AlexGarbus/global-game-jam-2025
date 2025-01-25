@@ -3,6 +3,19 @@ extends RigidBody3D
 
 @export var move_force = 5.0
 @export var jump_force = 4.5
+@export var max_powerup_contacts = 10
+
+
+var _powerup = false:
+	get:
+		return _powerup
+	set(value):
+		_powerup = value
+		_powerup_contacts = 0
+		$Pivot/Bubble.visible = value
+		$SphereShape.set_deferred("disabled", !value)
+
+var _powerup_contacts = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -17,3 +30,15 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		$Pivot.basis = Basis.looking_at(direction)
 		apply_force(Vector3(direction.x, 0, direction.z) * move_force)
+
+
+func _on_pickup_detector_area_entered(area: Area3D) -> void:
+	_powerup = true
+	area.queue_free()
+
+
+func _on_body_entered(body: Node) -> void:
+	if _powerup:
+		_powerup_contacts += 1
+		if _powerup_contacts == max_powerup_contacts:
+			_powerup = false

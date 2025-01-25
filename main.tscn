@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://q6w8qprc1sco"]
+[gd_scene load_steps=5 format=3 uid="uid://q6w8qprc1sco"]
 
 [ext_resource type="PackedScene" uid="uid://oe7y6q1dmsbn" path="res://player/player.tscn" id="1_aegj2"]
+[ext_resource type="PackedScene" uid="uid://bhaotujikxswr" path="res://pickup/pickup.tscn" id="2_eva6p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wlfph"]
 size = Vector3(100, 0, 100)
@@ -14,6 +15,7 @@ size = Vector3(100, 1, 100)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.444241, 0)
 shape = SubResource("BoxShape3D_wlfph")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
@@ -23,9 +25,12 @@ mesh = SubResource("BoxMesh_eqns3")
 transform = Transform3D(1, 0, 0, 0, 0.211632, 0.977349, 0, -0.97735, 0.211632, 0, 24.2496, 0)
 shadow_enabled = true
 
+[node name="Pickup" parent="." instance=ExtResource("2_eva6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.23931, 0.429177, 2.39522)
+
 [node name="Player" parent="." instance=ExtResource("1_aegj2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58308, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.196374, 0.980529, 0, -0.980529, 0.196374, 0, 9.90969, 1.11832)
+transform = Transform3D(1, 0, 0, 0, 0.960406, 0.278606, 0, -0.278606, 0.960406, 0, 4.26749, 9.00589)
 top_level = true
