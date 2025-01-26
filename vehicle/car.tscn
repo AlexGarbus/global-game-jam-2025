@@ -10,7 +10,8 @@ texture_filter = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_t58uy"]
 size = Vector3(1, 1.23425, 2.49023)
 
-[node name="Car" type="AnimatableBody3D"]
+[node name="Car" type="AnimatableBody3D" groups=["vehicle"]]
+collision_layer = 9
 collision_mask = 2
 
 [node name="VehicleCar" type="MeshInstance3D" parent="."]

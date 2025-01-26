@@ -15,13 +15,29 @@ var _powerup = false:
 		_powerup_contacts = 0
 		$Pivot/Bubble.visible = value
 		$SphereShape.set_deferred("disabled", !value)
-		physics_material_override.bounce = int(_powerup)
+		physics_material_override.bounce = int(value)
 		mass = powerup_mass if value else 1
+
+var _knockback = false:
+	get:
+		return _knockback
+	set(value):
+		_knockback = value
+		if value:
+			lock_rotation = false
+			$KnockbackTimer.start()
+		else:
+			global_rotation = Vector3()
+			lock_rotation = true
 
 var _powerup_contacts = 0
 
 
 func _physics_process(delta: float) -> void:
+	# Don't process player input during knockback.
+	if _knockback:
+		pass
+	
 	# Handle jump.
 	$FloorDetector.global_transform.origin = global_transform.origin
 	if Input.is_action_just_pressed("jump") and $FloorDetector.is_colliding():
@@ -39,6 +55,7 @@ func _physics_process(delta: float) -> void:
 func _exit_tree() -> void:
 	physics_material_override.bounce = 0
 
+
 func _on_pickup_detector_area_entered(area: Area3D) -> void:
 	_powerup = true
 	area.queue_free()
@@ -49,3 +66,9 @@ func _on_body_entered(body: Node) -> void:
 		_powerup_contacts += 1
 		if _powerup_contacts == max_powerup_contacts:
 			_powerup = false
+	elif body.is_in_group("vehicle"):
+		_knockback = true
+
+
+func _on_knockback_timer_timeout() -> void:
+	_knockback = false

@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+vehicle=""
+
 [importer_defaults]
 
 texture={
@@ -88,6 +92,7 @@ jump={
 3d_physics/layer_1="world"
 3d_physics/layer_2="player"
 3d_physics/layer_3="pickup"
+3d_physics/layer_4="vehicle"
 
 [rendering]
 
