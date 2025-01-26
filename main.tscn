@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://q6w8qprc1sco"]
+[gd_scene load_steps=8 format=3 uid="uid://q6w8qprc1sco"]
 
 [ext_resource type="PackedScene" uid="uid://oe7y6q1dmsbn" path="res://player/player.tscn" id="1_aegj2"]
 [ext_resource type="Script" path="res://main.gd" id="1_xik27"]
 [ext_resource type="PackedScene" uid="uid://btkb0n2wywa2b" path="res://level/level.tscn" id="2_8d82k"]
+[ext_resource type="Environment" uid="uid://c5qlxs2l8pxwa" path="res://environment.tres" id="2_wwls1"]
 [ext_resource type="PackedScene" uid="uid://buylsd5aerggn" path="res://user_interface/ui_start/ui_start.tscn" id="4_7r15o"]
 
 [sub_resource type="Curve3D" id="Curve3D_1a5ev"]
@@ -17,9 +18,13 @@ point_count = 5
 [node name="Main" type="Node"]
 script = ExtResource("1_xik27")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_wwls1")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.211632, 0.977349, 0, -0.97735, 0.211632, 0, 24.2496, 0)
-shadow_enabled = true
+light_energy = 0.5
+shadow_blur = 0.0
+sky_mode = 1
 
 [node name="Level" parent="." instance=ExtResource("2_8d82k")]
 

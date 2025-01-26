@@ -84,7 +84,7 @@ cycle_time = 3
 remote_path = NodePath("../../../Car")
 
 [node name="Car" parent="Vehicles" instance=ExtResource("4_ma35a")]
-transform = Transform3D(0.0156552, 0, -0.999859, 0, 0.999981, 0, 0.999861, 0, 0.0156551, 47.2424, -1.22347, 80.0538)
+transform = Transform3D(0.99996, 4.11972e-06, -0.00681852, 0, 0.999981, 0.000604185, 0.00681853, -0.000604171, 0.999958, -0.0503025, -1.47347, -4.19891)
 
 [node name="Path3D2" type="Path3D" parent="Vehicles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -114,7 +114,7 @@ cycle_time = 30
 remote_path = NodePath("../../../Car3")
 
 [node name="Car3" parent="Vehicles" instance=ExtResource("4_ma35a")]
-transform = Transform3D(0.707095, 0, -0.707094, 0, 0.999981, 0, 0.707095, 0, 0.707094, 0.135201, -1.47347, 2.2509)
+transform = Transform3D(0.0156552, 0, -0.999859, 0, 0.999981, 0, 0.999861, 0, 0.0156551, 47.2424, -1.47347, 80.0538)
 
 [node name="Path3D4" type="Path3D" parent="Vehicles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -159,7 +159,7 @@ cycle_time = 8
 remote_path = NodePath("../../../Car6")
 
 [node name="Car6" parent="Vehicles" instance=ExtResource("4_ma35a")]
-transform = Transform3D(0.555005, 0, -0.832505, 0, 1.00055, 0, 0.832506, 0, 0.555004, 19.201, -1.47416, -17.3134)
+transform = Transform3D(0.555007, 0, -0.832508, 0, 1.00055, 0, 0.83251, 0, 0.555006, 19.2011, -1.47417, -17.3135)
 
 [node name="Path3D7" type="Path3D" parent="Vehicles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
