@@ -81,6 +81,7 @@ stream = ExtResource("7_t5t6k")
 
 [node name="Knockback" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("8_bwqoa")
+volume_db = -4.0
 
 [node name="PowerupStart" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("9_blwwl")
@@ -90,9 +91,11 @@ stream = ExtResource("10_ckfib")
 
 [node name="PowerupEnd" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("11_0vbyc")
+volume_db = 10.0
 
 [node name="Scream" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("12_0evgd")
+volume_db = 10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="jumped" from="." to="Audio" method="_on_player_jumped"]

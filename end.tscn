@@ -320,8 +320,8 @@ script = ExtResource("1_lnr1v")
 environment = ExtResource("2_67iw1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.211632, 0.977349, 0, -0.97735, 0.211632, 0, 4.67298, 0)
-light_energy = 0.5
+transform = Transform3D(0.353553, 0.866025, -0.353553, 0.707107, -3.09086e-08, 0.707107, 0.612372, -0.5, -0.612372, 0, 4, 0)
+light_energy = 0.25
 sky_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
