@@ -1,14 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbnn1mrcwsnlx"]
+[gd_scene load_steps=9 format=3 uid="uid://bbnn1mrcwsnlx"]
 
 [ext_resource type="PackedScene" uid="uid://b0xolau4rr2fx" path="res://user_interface/ui_end/ui_end.tscn" id="1_5orgy"]
 [ext_resource type="Script" path="res://end.gd" id="1_lnr1v"]
 [ext_resource type="ArrayMesh" uid="uid://dy6dt6ng5uwjt" path="res://player/models/player.obj" id="2_8afmo"]
 [ext_resource type="Environment" uid="uid://c5qlxs2l8pxwa" path="res://environment.tres" id="2_67iw1"]
-[ext_resource type="Texture2D" uid="uid://ism6x00sbxsx" path="res://player/models/player_tex.png" id="3_mylx1"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m25qy"]
-albedo_texture = ExtResource("3_mylx1")
-texture_filter = 0
+[ext_resource type="Material" uid="uid://go44ro7nx67p" path="res://player/models/player_material.tres" id="4_wmnmt"]
 
 [sub_resource type="Animation" id="Animation_c0llp"]
 length = 0.001
@@ -122,6 +118,18 @@ tracks/9/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Model:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25, 0.25, 0.25)]
 }
 
 [sub_resource type="Animation" id="Animation_q2tif"]
@@ -255,6 +263,18 @@ tracks/10/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(7)
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Model:scale")
+tracks/11/interp = 0
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.25, 0.25, 0.25), Vector3(0.25, 0.25, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y4nbx"]
 _data = {
@@ -280,14 +300,14 @@ current = true
 size = 3.0
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.25, 0, -2.18557e-08, 0, 0.25, 0, 2.18557e-08, 0, -0.25, -1, 0, 0)
+transform = Transform3D(-0.25, 0, -3.7749e-08, 0, 0.25, 0, 3.7749e-08, 0, -0.25, -1, 0, 0)
 mesh = ExtResource("2_8afmo")
-surface_material_override/0 = SubResource("StandardMaterial3D_m25qy")
+surface_material_override/0 = ExtResource("4_wmnmt")
 
 [node name="Model2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.25, 0, -3.7749e-08, 0, 0.25, 0, 3.7749e-08, 0, -0.25, 1, 0, 0)
 mesh = ExtResource("2_8afmo")
-surface_material_override/0 = SubResource("StandardMaterial3D_m25qy")
+surface_material_override/0 = ExtResource("4_wmnmt")
 
 [node name="UiEnd" parent="." instance=ExtResource("1_5orgy")]
 
