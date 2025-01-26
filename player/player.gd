@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction = direction.rotated(Vector3.UP, deg_to_rad(45))
 	if direction:
 		$Pivot.basis = Basis.looking_at(direction)
 		apply_force(Vector3(direction.x, 0, direction.z) * move_force)
