@@ -43,7 +43,7 @@ var _powerup_contacts = 0
 func _physics_process(delta: float) -> void:
 	# Don't process player input during knockback.
 	if _knockback:
-		pass
+		return
 	
 	# Handle jump.
 	$FloorDetector.global_transform.origin = global_transform.origin
