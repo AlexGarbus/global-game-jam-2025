@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://buylsd5aerggn"]
+
+[ext_resource type="Script" path="res://user_interface/ui_start/ui_start.gd" id="1_4ps2h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ye66r"]
+font_size = 32
+font_color = Color(1, 0.945098, 0.909804, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UiStart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ps2h")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 131.0
+grow_horizontal = 2
+text = "It's pregnancy time!
+Get to the hospital!"
+label_settings = SubResource("LabelSettings_ye66r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

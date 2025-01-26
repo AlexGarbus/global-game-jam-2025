@@ -10,7 +10,8 @@ func _ready() -> void:
 
 
 func _on_start_timer_timeout() -> void:
-	$Player.global_transform.origin = $StartPath/PathFollow3D.global_transform.origin
+	$Player.global_position = $StartPath/PathFollow3D.global_position
+	$Player/Pivot.look_at(Vector3(0, $Player/Pivot.global_position.y, 0))
 
 
 func _on_world_boundary_body_entered(body: Node3D) -> void:

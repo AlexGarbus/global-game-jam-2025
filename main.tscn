@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://q6w8qprc1sco"]
+[gd_scene load_steps=7 format=3 uid="uid://q6w8qprc1sco"]
 
 [ext_resource type="PackedScene" uid="uid://oe7y6q1dmsbn" path="res://player/player.tscn" id="1_aegj2"]
 [ext_resource type="Script" path="res://main.gd" id="1_xik27"]
 [ext_resource type="PackedScene" uid="uid://btkb0n2wywa2b" path="res://level/level.tscn" id="2_8d82k"]
+[ext_resource type="PackedScene" uid="uid://buylsd5aerggn" path="res://user_interface/ui_start/ui_start.tscn" id="4_7r15o"]
 
 [sub_resource type="Curve3D" id="Curve3D_1a5ev"]
 _data = {
@@ -26,7 +27,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.47286, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 15, 20, 15)
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 15, 21, 15)
 projection = 1
 size = 15.0
 
@@ -35,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 curve = SubResource("Curve3D_1a5ev")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="StartPath"]
-transform = Transform3D(-0.0418682, 0, -0.999106, 0, 1, 0, 0.999106, 0, -0.0418682, -9.74137, 0, -10.8212)
+transform = Transform3D(-0.0418675, 0, -0.999106, 0, 1, 0, 0.999106, 0, -0.0418675, -9.74137, 0, -10.8212)
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -49,6 +50,8 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.0492, 0)
 shape = SubResource("WorldBoundaryShape3D_yyk7e")
+
+[node name="UiStart" parent="." instance=ExtResource("4_7r15o")]
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="body_entered" from="WorldBoundary" to="." method="_on_world_boundary_body_entered"]
