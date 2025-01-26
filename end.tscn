@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbnn1mrcwsnlx"]
+[gd_scene load_steps=13 format=3 uid="uid://bbnn1mrcwsnlx"]
 
 [ext_resource type="PackedScene" uid="uid://b0xolau4rr2fx" path="res://user_interface/ui_end/ui_end.tscn" id="1_5orgy"]
 [ext_resource type="Script" path="res://end.gd" id="1_lnr1v"]
 [ext_resource type="ArrayMesh" uid="uid://dy6dt6ng5uwjt" path="res://player/models/player.obj" id="2_8afmo"]
 [ext_resource type="Environment" uid="uid://c5qlxs2l8pxwa" path="res://environment.tres" id="2_67iw1"]
 [ext_resource type="Material" uid="uid://go44ro7nx67p" path="res://player/models/player_material.tres" id="4_wmnmt"]
+[ext_resource type="AudioStream" uid="uid://deop7tsbg7885" path="res://player/sounds/jump.wav" id="6_gh0u6"]
+[ext_resource type="AudioStream" uid="uid://b1hjelf76i6an" path="res://end_sounds/end_fanfare.wav" id="7_p5nt3"]
+[ext_resource type="AudioStream" uid="uid://ct6h7yeh3qppt" path="res://end_sounds/end_slide.wav" id="8_oke64"]
+[ext_resource type="AudioStream" uid="uid://d3odbfrr5op5m" path="res://end_sounds/end_sting.wav" id="9_0yhpq"]
 
 [sub_resource type="Animation" id="Animation_c0llp"]
 length = 0.001
@@ -134,7 +138,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id="Animation_q2tif"]
 resource_name = "play"
-length = 14.0
+length = 15.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -142,7 +146,7 @@ tracks/0/path = NodePath("UiEnd")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(4, 9),
+"times": PackedFloat32Array(4, 10),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [true],
@@ -239,7 +243,7 @@ tracks/8/loop_wrap = true
 tracks/8/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0, -4, 0, 0, 0.25, 0),
-"times": PackedFloat32Array(7, 8)
+"times": PackedFloat32Array(7.5, 8.5)
 }
 tracks/9/type = "bezier"
 tracks/9/imported = false
@@ -250,7 +254,7 @@ tracks/9/loop_wrap = true
 tracks/9/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(7)
+"times": PackedFloat32Array(7.5)
 }
 tracks/10/type = "bezier"
 tracks/10/imported = false
@@ -261,7 +265,7 @@ tracks/10/loop_wrap = true
 tracks/10/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(7)
+"times": PackedFloat32Array(7.5)
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -275,6 +279,33 @@ tracks/11/keys = {
 "update": 0,
 "values": [Vector3(0.25, 0.25, 0.25), Vector3(0.25, 0.25, 0)]
 }
+tracks/12/type = "audio"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("AudioStreamPlayer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_gh0u6")
+}, {
+"end_offset": 0.53,
+"start_offset": 0.0,
+"stream": ExtResource("7_p5nt3")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_oke64")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_0yhpq")
+}],
+"times": PackedFloat32Array(3, 4, 7.5, 10)
+}
+tracks/12/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y4nbx"]
 _data = {
@@ -316,5 +347,7 @@ libraries = {
 "": SubResource("AnimationLibrary_y4nbx")
 }
 autoplay = "play"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

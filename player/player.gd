@@ -6,12 +6,18 @@ extends RigidBody3D
 @export var powerup_mass = 0.5
 @export var max_powerup_contacts = 10
 
+signal jumped
+signal powerup_contacted
+signal powerup_changed(value)
+signal knockback_changed(value)
+
 
 var _powerup = false:
 	get:
 		return _powerup
 	set(value):
 		_powerup = value
+		powerup_changed.emit(value)
 		_powerup_contacts = 0
 		$Pivot/Bubble.visible = value
 		$SphereShape.set_deferred("disabled", !value)
@@ -23,6 +29,7 @@ var _knockback = false:
 		return _knockback
 	set(value):
 		_knockback = value
+		knockback_changed.emit(value)
 		if value:
 			lock_rotation = false
 			$KnockbackTimer.start()
@@ -42,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	$FloorDetector.global_transform.origin = global_transform.origin
 	if Input.is_action_just_pressed("jump") and $FloorDetector.is_colliding():
 		apply_impulse(Vector3.UP * jump_force)
+		jumped.emit()
 
 	# Get the input direction and handle the movement.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -66,6 +74,8 @@ func _on_body_entered(body: Node) -> void:
 		_powerup_contacts += 1
 		if _powerup_contacts == max_powerup_contacts:
 			_powerup = false
+		else:
+			powerup_contacted.emit()
 	elif body.is_in_group("vehicle"):
 		_knockback = true
 

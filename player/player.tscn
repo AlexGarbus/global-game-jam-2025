@@ -1,10 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://oe7y6q1dmsbn"]
+[gd_scene load_steps=18 format=3 uid="uid://oe7y6q1dmsbn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_mam4c"]
 [ext_resource type="ArrayMesh" uid="uid://dy6dt6ng5uwjt" path="res://player/models/player.obj" id="2_ss5hy"]
 [ext_resource type="Material" uid="uid://go44ro7nx67p" path="res://player/models/player_material.tres" id="3_u6qte"]
 [ext_resource type="ArrayMesh" uid="uid://cma8ssdk763sw" path="res://player/models/bubble.obj" id="4_qj2ro"]
 [ext_resource type="Texture2D" uid="uid://c1lteakc2n8h0" path="res://player/models/bubble_tex.png" id="5_up3se"]
+[ext_resource type="Script" path="res://player/player_audio.gd" id="6_7spsj"]
+[ext_resource type="AudioStream" uid="uid://deop7tsbg7885" path="res://player/sounds/jump.wav" id="7_t5t6k"]
+[ext_resource type="AudioStream" uid="uid://bahbcoq372xd8" path="res://player/sounds/knockback.wav" id="8_bwqoa"]
+[ext_resource type="AudioStream" uid="uid://dpoi52kbodpae" path="res://player/sounds/powerup_start.wav" id="9_blwwl"]
+[ext_resource type="AudioStream" uid="uid://b6akn2daqv2et" path="res://player/sounds/powerup_contact.wav" id="10_ckfib"]
+[ext_resource type="AudioStream" uid="uid://cb05g26andqi5" path="res://player/sounds/powerup_end.wav" id="11_0vbyc"]
+[ext_resource type="AudioStream" uid="uid://d1ym5p1jtngep" path="res://player/sounds/scream.wav" id="12_0evgd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x4y01"]
 
@@ -66,6 +73,31 @@ shape = SubResource("SphereShape3D_6g1ux")
 wait_time = 2.0
 one_shot = true
 
+[node name="Audio" type="Node" parent="."]
+script = ExtResource("6_7spsj")
+
+[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("7_t5t6k")
+
+[node name="Knockback" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("8_bwqoa")
+
+[node name="PowerupStart" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("9_blwwl")
+
+[node name="PowerupContact" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("10_ckfib")
+
+[node name="PowerupEnd" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("11_0vbyc")
+
+[node name="Scream" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("12_0evgd")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="jumped" from="." to="Audio" method="_on_player_jumped"]
+[connection signal="knockback_changed" from="." to="Audio" method="_on_player_knockback_changed"]
+[connection signal="powerup_changed" from="." to="Audio" method="_on_player_powerup_changed"]
+[connection signal="powerup_contacted" from="." to="Audio" method="_on_player_powerup_contacted"]
 [connection signal="area_entered" from="PickupDetector" to="." method="_on_pickup_detector_area_entered"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
