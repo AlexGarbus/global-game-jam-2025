@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://oe7y6q1dmsbn"]
+[gd_scene load_steps=11 format=3 uid="uid://oe7y6q1dmsbn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_mam4c"]
+[ext_resource type="ArrayMesh" uid="uid://dy6dt6ng5uwjt" path="res://player/models/player.obj" id="2_ss5hy"]
+[ext_resource type="Texture2D" uid="uid://ism6x00sbxsx" path="res://player/models/player_tex.png" id="3_8fjrp"]
+[ext_resource type="ArrayMesh" uid="uid://cma8ssdk763sw" path="res://player/models/bubble.obj" id="4_qj2ro"]
+[ext_resource type="Texture2D" uid="uid://c1lteakc2n8h0" path="res://player/models/bubble_tex.png" id="5_up3se"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gr76r"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp6ya"]
+albedo_texture = ExtResource("3_8fjrp")
+texture_filter = 0
 
-[sub_resource type="PrismMesh" id="PrismMesh_48d30"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_uohq2"]
-radius = 1.0
-height = 2.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaw5h"]
+albedo_texture = ExtResource("5_up3se")
+texture_filter = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqimg"]
 
@@ -30,15 +34,16 @@ jump_force = 5.0
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="Model" type="MeshInstance3D" parent="Pivot"]
-mesh = SubResource("CapsuleMesh_gr76r")
-
-[node name="Pointer" type="MeshInstance3D" parent="Pivot/Model"]
-transform = Transform3D(-0.5, 4.37114e-08, -1.91069e-15, 0, -2.18557e-08, -0.5, -4.37114e-08, -0.5, 2.18557e-08, 0, 0, -0.592)
-mesh = SubResource("PrismMesh_48d30")
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = ExtResource("2_ss5hy")
+surface_material_override/0 = SubResource("StandardMaterial3D_lp6ya")
 
 [node name="Bubble" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 visible = false
-mesh = SubResource("SphereMesh_uohq2")
+transparency = 0.25
+mesh = ExtResource("4_qj2ro")
+surface_material_override/0 = SubResource("StandardMaterial3D_aaw5h")
 
 [node name="CapsuleShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_eqimg")

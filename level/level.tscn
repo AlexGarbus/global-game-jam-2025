@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://btkb0n2wywa2b"]
+[gd_scene load_steps=7 format=3 uid="uid://btkb0n2wywa2b"]
 
 [ext_resource type="MeshLibrary" uid="uid://c2w2n2fg7p4la" path="res://level/meshlibrary.tres" id="1_1ll5j"]
 [ext_resource type="PackedScene" uid="uid://btgrbld0482bj" path="res://goal/goal.tscn" id="2_v1y6y"]
 [ext_resource type="Script" path="res://vehicle/vehicle_follow.gd" id="3_t06eh"]
 [ext_resource type="PackedScene" uid="uid://hhvwf1b3vuwp" path="res://vehicle/car.tscn" id="4_ma35a"]
+[ext_resource type="PackedScene" uid="uid://bhaotujikxswr" path="res://pickup/pickup.tscn" id="5_ipqrh"]
 
 [sub_resource type="Curve3D" id="Curve3D_jcfah"]
 _data = {
@@ -29,6 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, 3, 3.25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3648, 1.22347, 15.2491)
 
 [node name="Path3D" type="Path3D" parent="Vehicles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 curve = SubResource("Curve3D_jcfah")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Vehicles/Path3D"]
@@ -40,4 +42,9 @@ cycle_time = 3
 remote_path = NodePath("../../../Car")
 
 [node name="Car" parent="Vehicles" instance=ExtResource("4_ma35a")]
-transform = Transform3D(0.99996, 4.11973e-06, -0.00681852, 0, 0.999981, 0.000604185, 0.00681853, -0.000604171, 0.999958, -0.0503025, -1.22347, -4.19891)
+transform = Transform3D(0.99996, 4.11973e-06, -0.00681852, 0, 0.999981, 0.000604185, 0.00681853, -0.000604171, 0.999958, -0.0503025, -1.47347, -4.19891)
+
+[node name="Pickups" type="Node3D" parent="."]
+
+[node name="Pickup" parent="." instance=ExtResource("5_ipqrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4729, 0.25, 17)

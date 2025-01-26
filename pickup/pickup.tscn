@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhaotujikxswr"]
+[gd_scene load_steps=5 format=3 uid="uid://bhaotujikxswr"]
+
+[ext_resource type="ArrayMesh" uid="uid://cma8ssdk763sw" path="res://player/models/bubble.obj" id="1_ihdam"]
+[ext_resource type="Texture2D" uid="uid://c1lteakc2n8h0" path="res://player/models/bubble_tex.png" id="2_0jcvl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_haphs"]
-radius = 0.129398
+radius = 0.3
 
-[sub_resource type="SphereMesh" id="SphereMesh_q2oj7"]
-radius = 0.1
-height = 0.25
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frkvg"]
+albedo_texture = ExtResource("2_0jcvl")
+texture_filter = 0
 
 [node name="Pickup" type="Area3D"]
 collision_layer = 4
@@ -14,5 +17,8 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_haphs")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_q2oj7")
+[node name="Bubble" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transparency = 0.25
+mesh = ExtResource("1_ihdam")
+surface_material_override/0 = SubResource("StandardMaterial3D_frkvg")
