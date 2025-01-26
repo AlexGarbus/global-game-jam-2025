@@ -3,6 +3,7 @@ extends RigidBody3D
 
 @export var move_force = 5.0
 @export var jump_force = 4.5
+@export var powerup_mass = 0.5
 @export var max_powerup_contacts = 10
 
 
@@ -14,6 +15,8 @@ var _powerup = false:
 		_powerup_contacts = 0
 		$Pivot/Bubble.visible = value
 		$SphereShape.set_deferred("disabled", !value)
+		physics_material_override.bounce = int(_powerup)
+		mass = powerup_mass if value else 1
 
 var _powerup_contacts = 0
 
@@ -31,6 +34,9 @@ func _physics_process(delta: float) -> void:
 		$Pivot.basis = Basis.looking_at(direction)
 		apply_force(Vector3(direction.x, 0, direction.z) * move_force)
 
+
+func _exit_tree() -> void:
+	physics_material_override.bounce = 0
 
 func _on_pickup_detector_area_entered(area: Area3D) -> void:
 	_powerup = true
