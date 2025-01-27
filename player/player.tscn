@@ -1,0 +1,106 @@
+[gd_scene load_steps=18 format=3 uid="uid://oe7y6q1dmsbn"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_mam4c"]
+[ext_resource type="ArrayMesh" uid="uid://dy6dt6ng5uwjt" path="res://player/models/player.obj" id="2_ss5hy"]
+[ext_resource type="Material" uid="uid://go44ro7nx67p" path="res://player/models/player_material.tres" id="3_u6qte"]
+[ext_resource type="ArrayMesh" uid="uid://cma8ssdk763sw" path="res://player/models/bubble.obj" id="4_qj2ro"]
+[ext_resource type="Texture2D" uid="uid://c1lteakc2n8h0" path="res://player/models/bubble_tex.png" id="5_up3se"]
+[ext_resource type="Script" path="res://player/player_audio.gd" id="6_7spsj"]
+[ext_resource type="AudioStream" uid="uid://deop7tsbg7885" path="res://player/sounds/jump.wav" id="7_t5t6k"]
+[ext_resource type="AudioStream" uid="uid://bahbcoq372xd8" path="res://player/sounds/knockback.wav" id="8_bwqoa"]
+[ext_resource type="AudioStream" uid="uid://dpoi52kbodpae" path="res://player/sounds/powerup_start.wav" id="9_blwwl"]
+[ext_resource type="AudioStream" uid="uid://b6akn2daqv2et" path="res://player/sounds/powerup_contact.wav" id="10_ckfib"]
+[ext_resource type="AudioStream" uid="uid://cb05g26andqi5" path="res://player/sounds/powerup_end.wav" id="11_0vbyc"]
+[ext_resource type="AudioStream" uid="uid://d1ym5p1jtngep" path="res://player/sounds/scream.wav" id="12_0evgd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x4y01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaw5h"]
+albedo_texture = ExtResource("5_up3se")
+texture_filter = 0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqimg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xkprb"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6g1ux"]
+radius = 1.27195
+
+[node name="Player" type="RigidBody3D"]
+collision_layer = 3
+physics_material_override = SubResource("PhysicsMaterial_x4y01")
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_mam4c")
+move_force = 25.0
+jump_force = 5.0
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Model" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = ExtResource("2_ss5hy")
+surface_material_override/0 = ExtResource("3_u6qte")
+
+[node name="Bubble" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+visible = false
+transparency = 0.25
+mesh = ExtResource("4_qj2ro")
+surface_material_override/0 = SubResource("StandardMaterial3D_aaw5h")
+
+[node name="CapsuleShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_eqimg")
+
+[node name="SphereShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xkprb")
+disabled = true
+
+[node name="FloorDetector" type="RayCast3D" parent="."]
+top_level = true
+target_position = Vector3(0, -1.1, 0)
+
+[node name="PickupDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupDetector"]
+shape = SubResource("SphereShape3D_6g1ux")
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Audio" type="Node" parent="."]
+script = ExtResource("6_7spsj")
+
+[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("7_t5t6k")
+
+[node name="Knockback" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("8_bwqoa")
+volume_db = -4.0
+
+[node name="PowerupStart" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("9_blwwl")
+
+[node name="PowerupContact" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("10_ckfib")
+
+[node name="PowerupEnd" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("11_0vbyc")
+volume_db = 10.0
+
+[node name="Scream" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("12_0evgd")
+volume_db = 10.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="jumped" from="." to="Audio" method="_on_player_jumped"]
+[connection signal="knockback_changed" from="." to="Audio" method="_on_player_knockback_changed"]
+[connection signal="powerup_changed" from="." to="Audio" method="_on_player_powerup_changed"]
+[connection signal="powerup_contacted" from="." to="Audio" method="_on_player_powerup_contacted"]
+[connection signal="area_entered" from="PickupDetector" to="." method="_on_pickup_detector_area_entered"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

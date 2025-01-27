@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://q6w8qprc1sco"]
+
+[ext_resource type="PackedScene" uid="uid://oe7y6q1dmsbn" path="res://player/player.tscn" id="1_aegj2"]
+[ext_resource type="Script" path="res://main.gd" id="1_xik27"]
+[ext_resource type="PackedScene" uid="uid://btkb0n2wywa2b" path="res://level/level.tscn" id="2_8d82k"]
+[ext_resource type="Environment" uid="uid://c5qlxs2l8pxwa" path="res://environment.tres" id="2_wwls1"]
+[ext_resource type="Script" path="res://camera_follow.gd" id="4_2idxd"]
+[ext_resource type="PackedScene" uid="uid://buylsd5aerggn" path="res://user_interface/ui_start/ui_start.tscn" id="4_7r15o"]
+
+[sub_resource type="Curve3D" id="Curve3D_1a5ev"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -68, 0, -68, 0, 0, 0, 0, 0, 0, 75, 0, -68, 0, 0, 0, 0, 0, 0, 75, 0, 100, 0, 0, 0, 0, 0, 0, -68, 0, 100, 0, 0, 0, 0, 0, 0, -68, 0, -68),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_yyk7e"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_xik27")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_wwls1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.696364, 0.707107, 0.122788, 0.173648, -7.5904e-09, 0.984808, 0.696364, 0.707107, -0.122788, 0, 3, 0)
+shadow_enabled = true
+shadow_blur = 0.1
+sky_mode = 1
+
+[node name="Level" parent="." instance=ExtResource("2_8d82k")]
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 15, 31, 15)
+projection = 1
+size = 15.0
+near = 5.0
+far = 100.0
+script = ExtResource("4_2idxd")
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("1_aegj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="StartPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+curve = SubResource("Curve3D_1a5ev")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="StartPath"]
+transform = Transform3D(-4.37106e-08, 0, -0.999982, 0, 1, 0, 0.999982, 0, -4.37106e-08, -68, 0, -68)
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="WorldBoundary" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+shape = SubResource("WorldBoundaryShape3D_yyk7e")
+
+[node name="UiStart" parent="." instance=ExtResource("4_7r15o")]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_entered" from="WorldBoundary" to="." method="_on_world_boundary_body_entered"]

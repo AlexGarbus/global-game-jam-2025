@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ci80syj4djx3s"
+path="res://.godot/imported/tile_corner.obj-5242a7c2f48ddd2734d5eb7b7fa3d153.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tile_corner.obj-5242a7c2f48ddd2734d5eb7b7fa3d153.mesh"]
+
+source_file="res://level/tiles/tile_corner.obj"
+dest_files=["res://.godot/imported/tile_corner.obj-5242a7c2f48ddd2734d5eb7b7fa3d153.mesh", "res://.godot/imported/tile_corner.obj-5242a7c2f48ddd2734d5eb7b7fa3d153.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

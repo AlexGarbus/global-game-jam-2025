@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://btgrbld0482bj"]
+
+[ext_resource type="Script" path="res://goal/goal.gd" id="1_aoeac"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hfg5t"]
+height = 5.0
+radius = 5.0
+
+[node name="Goal" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_aoeac")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_hfg5t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

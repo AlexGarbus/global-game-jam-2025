@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://hhvwf1b3vuwp"]
+
+[ext_resource type="ArrayMesh" uid="uid://c8ptdbvgq0yh0" path="res://vehicle/models/vehicle_car.obj" id="1_v3n0e"]
+[ext_resource type="Texture2D" uid="uid://c28i11310vewe" path="res://vehicle/models/vehicle_car_tex.png" id="2_6hutn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lncsp"]
+albedo_texture = ExtResource("2_6hutn")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t58uy"]
+size = Vector3(1, 1.23425, 2.49023)
+
+[node name="Car" type="AnimatableBody3D" groups=["vehicle"]]
+collision_layer = 9
+collision_mask = 2
+
+[node name="VehicleCar" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_v3n0e")
+surface_material_override/0 = SubResource("StandardMaterial3D_lncsp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.617249, 0)
+shape = SubResource("BoxShape3D_t58uy")
