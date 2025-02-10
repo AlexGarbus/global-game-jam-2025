@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dy6dt6ng5uwjt" path="res://player/models/player.obj" id="2_ss5hy"]
 [ext_resource type="Material" uid="uid://go44ro7nx67p" path="res://player/models/player_material.tres" id="3_u6qte"]
 [ext_resource type="ArrayMesh" uid="uid://cma8ssdk763sw" path="res://player/models/bubble.obj" id="4_qj2ro"]
-[ext_resource type="Texture2D" uid="uid://c1lteakc2n8h0" path="res://player/models/bubble_tex.png" id="5_up3se"]
+[ext_resource type="Texture2D" uid="uid://c1lteakc2n8h0" path="res://player/models/bubble_tex.png" id="5_ppr6j"]
 [ext_resource type="Script" path="res://player/player_audio.gd" id="6_7spsj"]
 [ext_resource type="AudioStream" uid="uid://deop7tsbg7885" path="res://player/sounds/jump.wav" id="7_t5t6k"]
 [ext_resource type="AudioStream" uid="uid://bahbcoq372xd8" path="res://player/sounds/knockback.wav" id="8_bwqoa"]
@@ -15,9 +15,10 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x4y01"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaw5h"]
-albedo_texture = ExtResource("5_up3se")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7f8gg"]
+albedo_texture = ExtResource("5_ppr6j")
 texture_filter = 0
+disable_receive_shadows = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqimg"]
 
@@ -49,7 +50,7 @@ transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 visible = false
 transparency = 0.25
 mesh = ExtResource("4_qj2ro")
-surface_material_override/0 = SubResource("StandardMaterial3D_aaw5h")
+surface_material_override/0 = SubResource("StandardMaterial3D_7f8gg")
 
 [node name="CapsuleShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_eqimg")
