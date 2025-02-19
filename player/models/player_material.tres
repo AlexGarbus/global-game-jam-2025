@@ -5,4 +5,3 @@
 [resource]
 albedo_texture = ExtResource("1_irqcs")
 texture_filter = 0
-disable_receive_shadows = true
