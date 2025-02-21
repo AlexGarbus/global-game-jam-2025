@@ -261,16 +261,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.25, 0.25, -29.25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75, 0.25, -35.75)
 
 [node name="Pickup7" parent="Pickups" instance=ExtResource("5_ipqrh")]
-transform = Transform3D(1, 0, 0, 0, -0.540637, 0.841256, 0, -0.841256, -0.540637, 55.25, 0.25, 3.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.25, 0.25, 3.25)
 
 [node name="Pickup8" parent="Pickups" instance=ExtResource("5_ipqrh")]
-transform = Transform3D(1, 0, 0, 0, -0.540637, 0.841256, 0, -0.841256, -0.540637, 42.25, 0.25, 61.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.25, 0.25, 61.75)
 
 [node name="Pickup9" parent="Pickups" instance=ExtResource("5_ipqrh")]
-transform = Transform3D(1, 0, 0, 0, -0.540637, 0.841256, 0, -0.841256, -0.540637, -48.75, 0.25, 9.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.75, 0.25, 9.75)
 
 [node name="Pickup10" parent="Pickups" instance=ExtResource("5_ipqrh")]
-transform = Transform3D(1, 0, 0, 0, -0.540637, 0.841256, 0, -0.841256, -0.540637, -42.25, 0.25, 48.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.25, 0.25, 48.75)
 
 [node name="Pickup11" parent="Pickups" instance=ExtResource("5_ipqrh")]
-transform = Transform3D(1, 0, 0, 0, -0.540637, 0.841256, 0, -0.841256, -0.540637, -48.75, 0.25, -16.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.75, 0.25, -16.25)
